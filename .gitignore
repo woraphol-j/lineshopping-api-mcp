@@ -1,0 +1,46 @@
+# VS Code workspace settings
+.vscode/
+
+# Python cache and bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# macOS system files
+.DS_Store
+
+# Test and coverage files
+.coverage
+htmlcov/
+*.cover
+*.log
+
+
+# Environment files
+.env
+.env.*
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Miscellaneous
+*.sqlite3
+*.db
+
+# Backup and temp files
+*.bak
+*.tmp
+
+# Ignore compiled C extensions
+*.so
+
+# Ignore build and dist folders
+dist/
+build/
+*.egg-info/
