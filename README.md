@@ -138,4 +138,4 @@ uv run --with fastmcp fastmcp run app.py
 MIT
 
 ---
-This project is not an HTTP REST API server. It is an MCP server for agent integrations. For more details, see [FastMCP](https://github.com/line/fastmcp) and [LINE Shopping API](https://developers-oaplus.line.biz).
+This project is not an HTTP REST API server. It is an MCP server for agent integrations. For more details, see [FastMCP](https://gofastmcp.com/) and [LINE Shopping API](https://developers-oaplus.line.biz).
