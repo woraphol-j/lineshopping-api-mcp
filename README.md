@@ -21,6 +21,24 @@ MCP Server for the LINE Shopping API, enabling AI agents and tools to interact w
 
 ## Installation
 
+### Method 1: Using uvx (Recommended)
+
+Install and run directly from PyPI using `uvx`:
+
+```sh
+# Install and run the MCP server (note the different executable name)
+uvx --from lineshopping-api-mcp lineshopping-mcp
+```
+
+Or run with environment variables:
+
+```sh
+# Set your API key and run
+X_API_KEY=your_api_key_here uvx --from lineshopping-api-mcp lineshopping-mcp
+```
+
+### Method 2: Clone and Run
+
 1. **Clone the repository:**
 	```sh
 	git clone https://github.com/woraphol-j/lineshopping-api-mcp.git
@@ -32,16 +50,55 @@ MCP Server for the LINE Shopping API, enabling AI agents and tools to interact w
 	uv add fastmcp httpx
 	```
 
-3. **Create Environment File:**
-	Create a `.env` file in the project root:
-	```env
-	X_API_KEY=your_api_key_here
+3. **Run the server:**
+	```sh
+	# Set your API key and run
+	X_API_KEY=your_api_key_here uv run --with fastmcp fastmcp run app.py
 	```
+
+### Environment Configuration
+
+For persistent configuration, create a `.env` file in your working directory:
+```env
+X_API_KEY=your_api_key_here
+```
 
 
 ## Configuration & Integration
 
-To use this MCP server with an agent platform, configure your agent to launch the server using `uv` and the correct environment variables. Example config (from `.vscode/mcp.json`):
+### Using uvx (PyPI Installation)
+
+Configure your agent to use the PyPI-installed package:
+
+```jsonc
+{
+	"inputs": [
+		{
+			"type": "promptString",
+			"id": "line-shopping-api-key",
+			"description": "LINE Shopping API Key",
+			"password": true
+		}
+	],
+	"servers": {
+		"LINE Shopping API MCP": {
+			"command": "uvx",
+			"args": [
+				"--from",
+				"lineshopping-api-mcp",
+				"lineshopping-mcp"
+			],
+			"env": {
+				"X_API_KEY": "${input:line-shopping-api-key}"
+			}
+		}
+	}
+}
+```
+
+### Using Local Clone
+
+For local development or cloned repository:
 
 ```jsonc
 {
@@ -120,12 +177,28 @@ If you run into issues, check your agent platform's MCP logs for errors. Common 
 
 ## Development
 
+### Local Development
+
 ```sh
+# Clone the repository
+git clone https://github.com/woraphol-j/lineshopping-api-mcp.git
+cd lineshopping-api-mcp
+
 # Install dependencies
 uv add fastmcp httpx
 
 # Run the server (with fastmcp)
-uv run --with fastmcp fastmcp run app.py
+X_API_KEY=your_api_key_here uv run --with fastmcp fastmcp run app.py
+```
+
+### Building and Publishing
+
+```sh
+# Build the package
+uv build
+
+# Publish to PyPI (requires API token)
+uv publish --token your_pypi_token
 ```
 
 ## Dependencies
@@ -138,4 +211,4 @@ uv run --with fastmcp fastmcp run app.py
 MIT
 
 ---
-This project is not an HTTP REST API server. It is an MCP server for agent integrations. For more details, see [FastMCP](https://gofastmcp.com/) and [LINE Shopping API](https://developers-oaplus.line.biz).
+This project is not an HTTP REST API server. It is an MCP server for agent integrations. For more details, see [FastMCP](https://github.com/line/fastmcp) and [LINE Shopping API](https://developers-oaplus.line.biz).

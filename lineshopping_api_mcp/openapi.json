@@ -1,0 +1,3528 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "contact": {},
+    "title": "ECT Open API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://developers-oaplus.line.biz",
+      "description": "LINE Shopping API"
+    }
+  ],
+  "paths": {
+    "/myshop/v1/checkout-link": {
+      "post": {
+        "summary": "Create checkout link",
+        "description": "An API for generate checkout link.",
+        "tags": [
+          "MyShopOpenApiCheckoutLink"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "requestBody": {
+          "description": " ",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/checkout_link.CheckoutLinkCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/checkout_link.CheckoutLinkCreateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/inventory/{id}/adjust": {
+      "put": {
+        "summary": "Adjust inventory",
+        "description": "API for updating inventory by adjusting the inventory amount from the current inventory on hand.",
+        "tags": [
+          "MyShopOpenApiInventory"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Inventory ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Adjust inventory request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/inventory.AdjustRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inventory.UpdateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/inventory/{id}/decrease": {
+      "put": {
+        "summary": "Decrease inventory",
+        "description": "API for updating inventory by decreasing the inventory amount from the current inventory on hand.",
+        "tags": [
+          "MyShopOpenApiInventory"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Inventory ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Decrease inventory request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/inventory.DecreaseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inventory.UpdateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/inventory/{id}/increase": {
+      "put": {
+        "summary": "Increase inventory",
+        "description": "API for updating inventory by increasing the inventory amount from the current inventory on hand.",
+        "tags": [
+          "MyShopOpenApiInventory"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Inventory ID",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Increase inventory request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/inventory.IncreaseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inventory.UpdateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/orders": {
+      "get": {
+        "summary": "Get all orders",
+        "description": "An API for getting a list of orders by condition",
+        "tags": [
+          "MyShopOpenApiOrder"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "For searching the 'customer name' or 'order number' that partial match the given keyword",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "For pagination, page is the page number to query the list of orders",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "For pagination, per page is the number of showing orders on a page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "For sorting of results by specific field",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ORDER_NO",
+                "CREATED_AT",
+                "UPDATED_AT",
+                "CHECKED_OUT_AT"
+              ]
+            }
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "To define whether results are sorted in ascending or descending order",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DESC",
+                "ASC"
+              ]
+            }
+          },
+          {
+            "name": "orderStatus",
+            "in": "query",
+            "description": "Filtered by multiple values of order status",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "PENDING",
+                  "CONFIRMED",
+                  "SHIPPED",
+                  "COMPLETED",
+                  "CANCELLED"
+                ]
+              }
+            }
+          },
+          {
+            "name": "paymentStatus",
+            "in": "query",
+            "description": "Filtered by multiple values of payment status",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "PENDING",
+                  "PAID",
+                  "FAILED",
+                  "REFUNDED"
+                ]
+              }
+            }
+          },
+          {
+            "name": "paymentMethod",
+            "in": "query",
+            "description": "Filtered by multiple values of payment method",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "CREDIT_CARD",
+                  "BANK_TRANSFER",
+                  "COD",
+                  "WALLET"
+                ]
+              }
+            }
+          },
+          {
+            "name": "shipmentStatus",
+            "in": "query",
+            "description": "Filtered by multiple values of shipment status",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "PENDING",
+                  "PROCESSING",
+                  "SHIPPED",
+                  "DELIVERED"
+                ]
+              }
+            }
+          },
+          {
+            "name": "orderType",
+            "in": "query",
+            "description": "Filtered by multiple values of order type",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "NORMAL",
+                  "GIFT",
+                  "SUBSCRIPTION"
+                ]
+              }
+            }
+          },
+          {
+            "name": "startAt",
+            "in": "query",
+            "description": "Filtered by starting point of updated time. Example value is '2022-01-01T09:30:00Z'",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "yyyy-mm-ddThh:mm[:ss[.fff]]Z"
+            }
+          },
+          {
+            "name": "endAt",
+            "in": "query",
+            "description": "Filtered by ending point of updated time. Example value is '2022-01-01T09:30:00Z'",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "yyyy-mm-ddThh:mm[:ss[.fff]]Z"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/order.ListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/orders/{orderNo}": {
+      "get": {
+        "summary": "Order detail",
+        "description": "An API for getting an order detail",
+        "tags": [
+          "MyShopOpenApiOrder"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "description": "Order number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/order.Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/orders/{orderNo}/cancel": {
+      "put": {
+        "summary": "Cancel Order",
+        "description": "An API for cancel order.",
+        "tags": [
+          "MyShopOpenApiOrder"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "description": "Order number",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Cancel order request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/order.CancelRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/order.Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/orders/{orderNo}/mark-as-paid": {
+      "post": {
+        "summary": "Mark as paid (COD)",
+        "description": "Update order status to Complete by Mark payment status as Paid to the selected order that payment method is COD",
+        "tags": [
+          "MyShopOpenApiOrder"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "description": "Order number",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/order.Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/orders/{orderNo}/mark-as-ship": {
+      "post": {
+        "summary": "Mark as ship",
+        "description": "Update order status to Complete by Mark shipment status as shipped and add tracking number",
+        "tags": [
+          "MyShopOpenApiOrder"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "description": "Order number",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Mark as ship request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/order.MarkAsShipRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/order.Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/orders/{orderNo}/parcel-label": {
+      "post": {
+        "summary": "Print parcel label",
+        "description": "An API for downloading parcel label.",
+        "tags": [
+          "MyShopOpenApiOrder"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "description": "Order number",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Parcel Label request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/order.ParcelLabelRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/orders/{orderNo}/send-message": {
+      "put": {
+        "summary": "Send message via OA Plus flex message services",
+        "description": "Send message api is a proxy message services that receive message object and forward to flex message api",
+        "tags": [
+          "orders messages put"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "description": "Order number",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Order message request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/order.OrderMessageRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/order.SendMessageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/orders/{orderNo}/shipments": {
+      "put": {
+        "summary": "Update tracking number",
+        "description": "Update the shipping tracking number for the selected order that the shipment status is Shipped.",
+        "tags": [
+          "MyShopOpenApiOrder"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "description": "Order number",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update Shipment request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/order.UpdateShipmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/order.Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/products": {
+      "get": {
+        "summary": "Get all products",
+        "description": "An API for getting a list of products",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Filtered by multiple values of product id",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          },
+          {
+            "name": "skus",
+            "in": "query",
+            "description": "Filtered by multiple values of product sku",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "For pagination, page is the page number to query the list of products",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "perPage",
+            "in": "query",
+            "description": "For pagination, per page is the number of showing products on a page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/product.ListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create product",
+        "description": "An API for product creation. For product Categories ID variable please find more information on <a href=\"#tag/MyShopDevelopmentGuide\">Development guideline</a>",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "requestBody": {
+          "description": "create product request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product.CreateProductRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/product.CreateProductResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/products/{id}": {
+      "delete": {
+        "summary": "Delete product",
+        "description": "An API for product deletion.",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success, No content"
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update product detail",
+        "description": "An API for product detail updating. For product Categories ID variable please find more information on <a href=\"#tag/MyShopDevelopmentGuide\">Development guideline</a>",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update product detail request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product.UpdateProductDetailsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/product.UpdateProductDetailsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/products/{id}/delete-variant-option": {
+      "post": {
+        "summary": "Delete product variant",
+        "description": "An API for product variant deletion.",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "delete product variant request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product.ProductVariantDeleteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success, No content"
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/products/{id}/display-status/{status}": {
+      "post": {
+        "summary": "Update product's display status",
+        "description": "An API for product's display status updating.",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "description": "Product's display status",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "onsale",
+                "hide"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/product.Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/products/{id}/prices": {
+      "patch": {
+        "summary": "Update product price",
+        "description": "An API for updating prices and instant discounts on the product. (You can't edit product price and instant discount during the promotion period.)",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update instant discount and variants price",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product.ProductPriceUpdateValidator"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/product.Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/products/{id}/variant": {
+      "patch": {
+        "summary": "Update product variant detail",
+        "description": "An API for update specific variant detail for both with and without variant product.",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "update product variant request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product.ProductVariantDetailsUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/product.Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/products/{id}/variants": {
+      "post": {
+        "summary": "Create product variants",
+        "description": "An API for product variants creation.",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Product id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "create product variant request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product.productVariantCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/product.Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/myshop/v1/settlements/{orderNo}": {
+      "get": {
+        "summary": "Settlement detail",
+        "description": "An API for getting a settlement detail",
+        "tags": [
+          "MyShopOpenApiSettlement"
+        ],
+        "security": [
+          {
+            "X-API-KEY": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "orderNo",
+            "in": "path",
+            "description": "Order number",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/settlement.SettlementResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "X-API-KEY": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-KEY"
+      }
+    },
+    "schemas": {
+      "ProductVariantOption1": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Product variant option 1 data for updating product variant option 1 value",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductVariantOption1Data"
+            }
+          },
+          "name": {
+            "description": "Product variant option 1 name",
+            "type": "string",
+            "example": "color"
+          }
+        }
+      },
+      "ProductVariantOption1Data": {
+        "type": "object",
+        "required": [
+          "currentValue",
+          "newValue"
+        ],
+        "properties": {
+          "currentValue": {
+            "description": "current value of product variant option 1",
+            "type": "string",
+            "example": "red"
+          },
+          "newValue": {
+            "description": "new value of product variant option 1",
+            "type": "string",
+            "example": "pink"
+          }
+        }
+      },
+      "ProductVariantOption2": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "description": "Product variant option 2 data for updating product variant option 2 value",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductVariantOption2Data"
+            }
+          },
+          "name": {
+            "description": "Product variant option 2 name",
+            "type": "string",
+            "example": "size"
+          }
+        }
+      },
+      "ProductVariantOption2Data": {
+        "type": "object",
+        "required": [
+          "currentValue",
+          "newValue"
+        ],
+        "properties": {
+          "currentValue": {
+            "description": "current value of product variant option 2",
+            "type": "string",
+            "example": "S"
+          },
+          "newValue": {
+            "description": "new value of product variant option 2",
+            "type": "string",
+            "example": "small"
+          }
+        }
+      },
+      "ProductVariantOptions": {
+        "type": "object",
+        "properties": {
+          "option1": {
+            "description": "Product variant option 1",
+            "$ref": "#/components/schemas/ProductVariantOption1"
+          },
+          "option2": {
+            "description": "Product variant option 2",
+            "$ref": "#/components/schemas/ProductVariantOption2"
+          }
+        }
+      },
+      "api.Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "description": "Error code",
+            "type": "string",
+            "enum": [
+              "BAD_REQUEST",
+              "DATA_CONFLICT",
+              "INTERNAL_ERROR",
+              "NOT_FOUND",
+              "PERMISSION_DENIED",
+              "UNAUTHORIZED"
+            ]
+          },
+          "info": {
+            "description": "Error info (optional)",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "message": {
+            "description": "Error message",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "Response timestamp",
+            "type": "integer"
+          }
+        }
+      },
+      "checkout_link.CheckoutLinkCreateRequest": {
+        "type": "object",
+        "required": [
+          "orderItems"
+        ],
+        "properties": {
+          "orderItems": {
+            "description": "List of product for checkout link",
+            "type": "array",
+            "maxItems": 15,
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/checkout_link.CheckoutLinkItem"
+            }
+          }
+        }
+      },
+      "checkout_link.CheckoutLinkCreateResponse": {
+        "type": "object",
+        "properties": {
+          "checkoutLink": {
+            "type": "string"
+          }
+        }
+      },
+      "checkout_link.CheckoutLinkItem": {
+        "type": "object",
+        "required": [
+          "productId",
+          "quantity"
+        ],
+        "properties": {
+          "productId": {
+            "description": "Product ID",
+            "type": "integer",
+            "example": 1000071365
+          },
+          "quantity": {
+            "description": "Quantity must be greater than 0, lower than 999.",
+            "type": "integer",
+            "example": 1
+          },
+          "variantId": {
+            "description": "Product variant ID",
+            "type": "integer",
+            "example": 332677
+          }
+        }
+      },
+      "inventory.AdjustRequest": {
+        "type": "object",
+        "required": [
+          "amount"
+        ],
+        "properties": {
+          "amount": {
+            "description": "Amount must greater than or equal to 0 and less than 100,000 (0 <= amount + availableNumber < 100,000)",
+            "type": "integer",
+            "maximum": 99999,
+            "minimum": 0,
+            "example": 10
+          }
+        }
+      },
+      "inventory.DecreaseRequest": {
+        "type": "object",
+        "required": [
+          "amount"
+        ],
+        "properties": {
+          "amount": {
+            "description": "Amount must greater than 0 and less than 100,000 (0 < amount <= availableNumber < 100,000)",
+            "type": "integer",
+            "maximum": 99999,
+            "minimum": 1,
+            "example": 10
+          }
+        }
+      },
+      "inventory.IncreaseRequest": {
+        "type": "object",
+        "required": [
+          "amount"
+        ],
+        "properties": {
+          "amount": {
+            "description": "Amount must greater than 0 and less than 100,000 (0 < amount + availableNumber < 100,000)",
+            "type": "integer",
+            "maximum": 99999,
+            "minimum": 1,
+            "example": 10
+          }
+        }
+      },
+      "inventory.UpdateResponse": {
+        "type": "object",
+        "properties": {
+          "availableNumber": {
+            "description": "Quantity that is available and display on the storefront  (Exclude \u2018Reserved\u2019 and \u2018Ready to ship\u2019 status)",
+            "type": "integer"
+          },
+          "onHandAmount": {
+            "description": "Quantity in stock (Include \u2018Reserved\u2019 and \u2018Ready to ship\u2019 status)",
+            "type": "integer"
+          },
+          "readyToShipAmount": {
+            "description": "Quantity that customers complete payment and wait to ship",
+            "type": "integer"
+          },
+          "reservedAmount": {
+            "description": "Quantity that customers do not complete payment",
+            "type": "integer"
+          }
+        }
+      },
+      "order.CancelRequest": {
+        "type": "object",
+        "required": [
+          "remarkCancel"
+        ],
+        "properties": {
+          "remarkCancel": {
+            "type": "string",
+            "maxLength": 560,
+            "example": "remark cancel"
+          }
+        }
+      },
+      "order.ListResponse": {
+        "type": "object",
+        "properties": {
+          "currentPage": {
+            "description": "Current page number",
+            "type": "integer"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/order.ResponseWithoutItems"
+            }
+          },
+          "perPage": {
+            "description": "Number of showing orders per page",
+            "type": "integer"
+          },
+          "totalPage": {
+            "description": "Total page numbers of the result",
+            "type": "integer"
+          },
+          "totalRow": {
+            "description": "Total number of orders",
+            "type": "integer"
+          }
+        }
+      },
+      "order.MarkAsShipRequest": {
+        "type": "object",
+        "properties": {
+          "trackingNumber": {
+            "type": "string",
+            "maxLength": 200,
+            "example": "LM-123-456"
+          },
+          "trackingUrl": {
+            "type": "string",
+            "maxLength": 200,
+            "example": "https://tracking.com/LM-123-456"
+          }
+        }
+      },
+      "order.OrderMessageRequest": {
+        "type": "object",
+        "required": [
+          "messages"
+        ],
+        "properties": {
+          "messages": {
+            "type": "array",
+            "maxItems": 5,
+            "minItems": 1,
+            "items": {}
+          }
+        }
+      },
+      "order.ParcelLabelRequest": {
+        "type": "object",
+        "required": [
+          "option",
+          "size"
+        ],
+        "properties": {
+          "details": {
+            "description": "Parcel label additional detail. <br> Please see Parcel Label Request:  <a href=\"#Adding-Parcel-Detail\">Adding Parcel Detail</a>",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "NOTE_FROM_SELLER",
+                "NOTE_FROM_BUYER",
+                "DELIVERY_NOTE"
+              ]
+            }
+          },
+          "language": {
+            "description": "Language used on the parcel label",
+            "type": "string",
+            "enum": [
+              "TH",
+              "EN"
+            ]
+          },
+          "option": {
+            "description": "Parcel label option. <br> Please see Parcel Label Request: <a href=\"#Parcel-Size-and-Option\">Parcel Size and Option</a>",
+            "type": "string",
+            "enum": [
+              "ALL",
+              "RECEIPT_ONLY",
+              "RECIPIENT_AND_RECEIPT",
+              "RECIPIENT_ONLY",
+              "SENDER_AND_RECIPIENT"
+            ]
+          },
+          "size": {
+            "description": "Parcel label format",
+            "type": "string",
+            "enum": [
+              "A4",
+              "THERMAL"
+            ]
+          }
+        }
+      },
+      "order.Response": {
+        "type": "object",
+        "properties": {
+          "checkoutAt": {
+            "description": "Checkouted date",
+            "type": "string"
+          },
+          "discountAmount": {
+            "description": "Total discount from the order price (excluding instant discounts applied to products)",
+            "type": "number"
+          },
+          "isGift": {
+            "description": "If product is set to 'Allow gift' or 'Gift only' will be returned 'true'",
+            "type": "boolean",
+            "example": false
+          },
+          "lastUpdatedAt": {
+            "description": "Last updated date",
+            "type": "string"
+          },
+          "orderItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/order.ResponseWithItem"
+            }
+          },
+          "orderNumber": {
+            "description": "Order number",
+            "type": "string"
+          },
+          "orderStatus": {
+            "description": "Order status",
+            "type": "string",
+            "enum": [
+              "FINALIZED",
+              "COMPLETED",
+              "EXPIRED",
+              "CANCELED"
+            ]
+          },
+          "paidAt": {
+            "description": "Paid date",
+            "type": "string"
+          },
+          "paymentMethod": {
+            "description": "Payment method",
+            "type": "string",
+            "enum": [
+              "COD",
+              "BANK",
+              "PAYMENT_LS_RLP",
+              "PAYMENT_LS_MOBILE_BANKING_KPLUS",
+              "PAYMENT_LS_MOBILE_BANKING_SCB",
+              "PAYMENT_LS_QR_PROMPTPAY"
+            ]
+          },
+          "paymentStatus": {
+            "description": "Payment status",
+            "type": "string",
+            "enum": [
+              "NO_PAYMENT",
+              "PENDING",
+              "PAID",
+              "REFUND",
+              "PENDING_REFUND",
+              "FAILED_REFUND",
+              "FAILED_AFTER_PAID",
+              "REJECTED_REFUND"
+            ]
+          },
+          "remarkBuyer": {
+            "description": "Note from buyer",
+            "type": "string"
+          },
+          "remarkRecipient": {
+            "description": "Remark recipient",
+            "type": "string"
+          },
+          "shipmentDetail": {
+            "$ref": "#/components/schemas/order.ShipmentDetail"
+          },
+          "shipmentPrice": {
+            "description": "Total shipping fee",
+            "type": "number"
+          },
+          "shipmentStatus": {
+            "description": "Shipment status",
+            "type": "string",
+            "enum": [
+              "NO_SHIPMENT",
+              "PENDING",
+              "SHIPMENT_READY",
+              "ON_DELIVERY",
+              "SHIPPED_ALL"
+            ]
+          },
+          "shippingAddress": {
+            "$ref": "#/components/schemas/order.ShippingAddress"
+          },
+          "subtotalPrice": {
+            "description": "Subtotal price after applying instant discount to order items",
+            "type": "number"
+          },
+          "totalPrice": {
+            "description": "Total order price (subtotalPrice + shipmentPrice - discountAmount)",
+            "type": "number"
+          },
+          "weight": {
+            "description": "Total weight",
+            "type": "number"
+          }
+        }
+      },
+      "order.ResponseWithItem": {
+        "type": "object",
+        "properties": {
+          "barcode": {
+            "description": "Product barcode",
+            "type": "string"
+          },
+          "discountedPrice": {
+            "description": "Product price after applying instant discount",
+            "type": "number"
+          },
+          "imageURL": {
+            "description": "A main product image",
+            "type": "string"
+          },
+          "name": {
+            "description": "Product name",
+            "type": "string"
+          },
+          "price": {
+            "description": "Product price",
+            "type": "number"
+          },
+          "productId": {
+            "description": "Product id",
+            "type": "integer"
+          },
+          "quantity": {
+            "description": "Order amount",
+            "type": "number"
+          },
+          "sku": {
+            "description": "Product sku",
+            "type": "string"
+          },
+          "variantId": {
+            "description": "Product variant id",
+            "type": "integer"
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/order.Variant"
+            }
+          },
+          "weight": {
+            "description": "Product weight",
+            "type": "number"
+          }
+        }
+      },
+      "order.ResponseWithoutItems": {
+        "type": "object",
+        "properties": {
+          "checkoutAt": {
+            "description": "Checkouted date",
+            "type": "string"
+          },
+          "discountAmount": {
+            "description": "Total discount from the order price (excluding instant discounts applied to products)",
+            "type": "number"
+          },
+          "isGift": {
+            "description": "If product is set to 'Allow gift' or 'Gift only' will be returned 'true'",
+            "type": "boolean",
+            "example": false
+          },
+          "lastUpdatedAt": {
+            "description": "Last updated date",
+            "type": "string"
+          },
+          "orderNumber": {
+            "description": "Order number",
+            "type": "string"
+          },
+          "orderStatus": {
+            "description": "Order status",
+            "type": "string",
+            "enum": [
+              "FINALIZED",
+              "COMPLETED",
+              "EXPIRED",
+              "CANCELED"
+            ]
+          },
+          "paidAt": {
+            "description": "Paid date",
+            "type": "string"
+          },
+          "paymentMethod": {
+            "description": "Payment method",
+            "type": "string",
+            "enum": [
+              "COD",
+              "BANK",
+              "PAYMENT_LS_RLP",
+              "PAYMENT_LS_MOBILE_BANKING_KPLUS",
+              "PAYMENT_LS_MOBILE_BANKING_SCB",
+              "PAYMENT_LS_QR_PROMPTPAY"
+            ]
+          },
+          "paymentStatus": {
+            "description": "Payment status",
+            "type": "string",
+            "enum": [
+              "NO_PAYMENT",
+              "PENDING",
+              "PAID",
+              "REFUND",
+              "PENDING_REFUND",
+              "FAILED_REFUND",
+              "FAILED_AFTER_PAID",
+              "REJECTED_REFUND"
+            ]
+          },
+          "remarkBuyer": {
+            "description": "Note from buyer",
+            "type": "string"
+          },
+          "remarkRecipient": {
+            "description": "Remark recipient",
+            "type": "string"
+          },
+          "shipmentDetail": {
+            "$ref": "#/components/schemas/order.ShipmentDetail"
+          },
+          "shipmentPrice": {
+            "description": "Total shipping fee",
+            "type": "number"
+          },
+          "shipmentStatus": {
+            "description": "Shipment status",
+            "type": "string",
+            "enum": [
+              "NO_SHIPMENT",
+              "PENDING",
+              "SHIPMENT_READY",
+              "ON_DELIVERY",
+              "SHIPPED_ALL"
+            ]
+          },
+          "shippingAddress": {
+            "$ref": "#/components/schemas/order.ShippingAddress"
+          },
+          "subtotalPrice": {
+            "description": "Subtotal price after applying instant discount to order items",
+            "type": "number"
+          },
+          "totalPrice": {
+            "description": "Total order price (subtotalPrice + shipmentPrice - discountAmount)",
+            "type": "number"
+          },
+          "weight": {
+            "description": "Total weight",
+            "type": "number"
+          }
+        }
+      },
+      "order.SendMessageResponse": {
+        "type": "object",
+        "properties": {
+          "messageIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "order.ShipmentDetail": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "description": "Shipment description",
+            "type": "string"
+          },
+          "isAutoTracking": {
+            "description": "If shipment is 'auto-tracking status enabled' will be returned 'true'",
+            "type": "boolean"
+          },
+          "isCod": {
+            "description": "If shipment is 'COD' will be returned 'true'",
+            "type": "boolean"
+          },
+          "name": {
+            "description": "Shipment name",
+            "type": "string"
+          },
+          "shipmentCompanyId": {
+            "description": "Shipment company id",
+            "type": "integer"
+          },
+          "shipmentCompanyNameEn": {
+            "description": "Shipment company name english",
+            "type": "string"
+          },
+          "shipmentCompanyNameTh": {
+            "description": "Shipment company name thai",
+            "type": "string"
+          },
+          "trackingNumber": {
+            "description": "Tracking number",
+            "type": "string"
+          },
+          "trackingUrl": {
+            "description": "Tracking url",
+            "type": "string"
+          },
+          "type": {
+            "description": "Shipment type",
+            "type": "string",
+            "enum": [
+              "STANDARD",
+              "COD",
+              "MESSENGER"
+            ]
+          }
+        }
+      },
+      "order.ShippingAddress": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "description": "Shipment address",
+            "type": "string"
+          },
+          "country": {
+            "description": "Shipment country",
+            "type": "string"
+          },
+          "district": {
+            "description": "Shipment district",
+            "type": "string"
+          },
+          "email": {
+            "description": "Recipient email",
+            "type": "string"
+          },
+          "phoneNumber": {
+            "description": "Recipient phone number",
+            "type": "string"
+          },
+          "postalCode": {
+            "description": "Shipment postcode",
+            "type": "string"
+          },
+          "province": {
+            "description": "Shipment province",
+            "type": "string"
+          },
+          "recipientName": {
+            "description": "Recipient name",
+            "type": "string"
+          },
+          "subDistrict": {
+            "description": "Shipment sub district",
+            "type": "string"
+          }
+        }
+      },
+      "order.UpdateShipmentRequest": {
+        "type": "object",
+        "properties": {
+          "trackingNumber": {
+            "type": "string",
+            "maxLength": 200,
+            "example": "LM-123-456"
+          },
+          "trackingUrl": {
+            "type": "string",
+            "maxLength": 200,
+            "example": "https://tracking.com/LM-123-456"
+          }
+        }
+      },
+      "order.Variant": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Option such as color",
+            "type": "string"
+          },
+          "value": {
+            "description": "Option value such as red, green, blue, etc.",
+            "type": "string"
+          }
+        }
+      },
+      "product.Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Identifying number of category",
+            "type": "integer"
+          },
+          "nameEn": {
+            "description": "Category name in english",
+            "type": "string"
+          },
+          "nameTh": {
+            "description": "Category name in thai",
+            "type": "string"
+          }
+        }
+      },
+      "product.CreateProductRequest": {
+        "type": "object",
+        "required": [
+          "categoryId",
+          "code",
+          "imageUrls",
+          "name",
+          "variants"
+        ],
+        "properties": {
+          "brand": {
+            "description": "Product brand",
+            "type": "string",
+            "example": "productBand"
+          },
+          "categoryId": {
+            "description": "Product category id",
+            "type": "integer",
+            "example": 1
+          },
+          "code": {
+            "description": "Product code",
+            "type": "string",
+            "example": "productCode-123-456"
+          },
+          "description": {
+            "description": "Product description with HTML formatting support",
+            "type": "string",
+            "example": "description"
+          },
+          "imageUrls": {
+            "description": "Product image urls",
+            "type": "array",
+            "maxItems": 7,
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "https://line.me/image_1.jpg"
+            ]
+          },
+          "instantDiscount": {
+            "description": "Product instant discount must be greater than 0. If instant discount amount is 0, the instant discount will be disabled.",
+            "type": "number"
+          },
+          "licenses": {
+            "description": "The list of licenses for your product",
+            "$ref": "#/components/schemas/product.ProductLicenseRequest"
+          },
+          "name": {
+            "description": "Product name",
+            "type": "string",
+            "example": "productName"
+          },
+          "variantOptions": {
+            "description": "Product variant options",
+            "$ref": "#/components/schemas/product.ProductVariantOptions"
+          },
+          "variants": {
+            "description": "Product variants",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/product.ProductVariant"
+            }
+          }
+        }
+      },
+      "product.CreateProductResponse": {
+        "type": "object",
+        "properties": {
+          "brand": {
+            "description": "Product brand",
+            "type": "string"
+          },
+          "category": {
+            "description": "Category Object",
+            "$ref": "#/components/schemas/product.Category"
+          },
+          "code": {
+            "description": "Product code",
+            "type": "string"
+          },
+          "description": {
+            "description": "Product description with HTML formatting support",
+            "type": "string"
+          },
+          "giftGroups": {
+            "description": "Gift Groups of product",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/product.GiftGroup"
+            }
+          },
+          "giftOption": {
+            "description": "Product Gift Option",
+            "type": "string",
+            "enum": [
+              "NO_GIFT",
+              "ALLOW_GIFT",
+              "GIFT_ONLY"
+            ]
+          },
+          "hasOnlyDefaultVariant": {
+            "description": "If product doesn't have any variant will be returned 'true'",
+            "type": "boolean"
+          },
+          "id": {
+            "description": "Identifying number of product",
+            "type": "integer"
+          },
+          "imageUrls": {
+            "description": "Product image urls",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "instantDiscount": {
+            "description": "If product doesn't have instant discount will be returned '0' otherwise returned with number",
+            "type": "number"
+          },
+          "isDisplay": {
+            "description": "If product is displaying on storefront will be returned 'true'",
+            "type": "boolean"
+          },
+          "licenses": {
+            "description": "The list of licenses for your product",
+            "$ref": "#/components/schemas/product.Licenses"
+          },
+          "name": {
+            "description": "Product name",
+            "type": "string"
+          },
+          "variantOptions": {
+            "description": "Product options such as size or color",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/product.VariantOption"
+            }
+          },
+          "variants": {
+            "description": "Product variants",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/product.Variant"
+            }
+          }
+        }
+      },
+      "product.GiftGroup": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Gift Group id",
+            "type": "integer"
+          },
+          "nameEn": {
+            "description": "Gift Group English name",
+            "type": "string"
+          },
+          "nameTh": {
+            "description": "Gift Group Thai name",
+            "type": "string"
+          }
+        }
+      },
+      "product.Licenses": {
+        "type": "object",
+        "properties": {
+          "fda": {
+            "description": "The registration number of the FDA license/permit",
+            "type": "string"
+          },
+          "fdaAds": {
+            "description": "The registration number for the advertising license of the FDA license/permit",
+            "type": "string"
+          },
+          "tisi": {
+            "description": "The industrial product standard number of the industrial standard",
+            "type": "string"
+          }
+        }
+      },
+      "product.ListResponse": {
+        "type": "object",
+        "properties": {
+          "currentPage": {
+            "description": "Current page number",
+            "type": "integer"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/product.Response"
+            }
+          },
+          "perPage": {
+            "description": "Number of showing products per page",
+            "type": "integer"
+          },
+          "totalPage": {
+            "description": "Total page numbers of the result",
+            "type": "integer"
+          },
+          "totalRow": {
+            "description": "Total number of products",
+            "type": "integer"
+          }
+        }
+      },
+      "product.ProductLicenseRequest": {
+        "type": "object",
+        "properties": {
+          "fda": {
+            "description": "The registration number of the FDA license/permit",
+            "type": "string",
+            "example": "G 50033/67"
+          },
+          "fdaAds": {
+            "description": "The registration number for the advertising license of the FDA license/permit",
+            "type": "string",
+            "example": "\u0e06\u0e2d. 1/2563"
+          },
+          "tisi": {
+            "description": "The industrial product standard number of the industrial standard",
+            "type": "string",
+            "example": "1040-2541"
+          }
+        }
+      },
+      "product.ProductPriceUpdateValidator": {
+        "type": "object",
+        "required": [
+          "instantDiscount",
+          "variants"
+        ],
+        "properties": {
+          "instantDiscount": {
+            "description": "Product instant discount must be greater than 0. If instant discount amount is 0, the instant discount will be disabled.",
+            "type": "number",
+            "maximum": 99999998,
+            "minimum": 0,
+            "example": 10
+          },
+          "variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/product.ProductVariantPriceUpdateRequest"
+            }
+          }
+        }
+      },
+      "product.ProductVariant": {
+        "type": "object",
+        "required": [
+          "onHandNumber",
+          "price",
+          "weight"
+        ],
+        "properties": {
+          "barcode": {
+            "description": "barcode",
+            "type": "string",
+            "example": "barcode-101"
+          },
+          "onHandNumber": {
+            "description": "onHandNumber must be greater than 0, lower than 99,999,999.",
+            "type": "integer",
+            "example": 10
+          },
+          "options": {
+            "description": "order of option from variantOptions in the format of <code>[option1, option2]</code>.",
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "example": [
+              0,
+              0
+            ]
+          },
+          "price": {
+            "description": "price must be greater than 0, lower than 99999999 and allow with two decimal place only.",
+            "type": "number",
+            "example": 99
+          },
+          "sku": {
+            "description": "stock keeping unit",
+            "type": "string",
+            "example": "sku-101"
+          },
+          "weight": {
+            "description": "weight must be greater than or equal to 0.01 Kg, lower than or equal to 999.99 Kg and allow with two decimal place only.",
+            "type": "number",
+            "example": 1
+          }
+        }
+      },
+      "product.ProductVariantDeleteRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "value"
+        ],
+        "properties": {
+          "name": {
+            "description": "Name of product variant",
+            "type": "string",
+            "example": "color"
+          },
+          "value": {
+            "description": "Value of product variant",
+            "type": "string",
+            "example": "red"
+          }
+        }
+      },
+      "product.ProductVariantDetailsUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "barcode": {
+            "description": "Product variant barcode.",
+            "type": "string",
+            "example": "barcode-101"
+          },
+          "id": {
+            "description": "Product variant id.",
+            "type": "integer",
+            "example": 100
+          },
+          "imageUrl": {
+            "description": "Product variant image URL.",
+            "type": "string",
+            "example": "https://line.me/image_1.jpg"
+          },
+          "onHandNumber": {
+            "description": "Quantity in stock (Include \u2018Reserved\u2019 and \u2018Ready to ship\u2019 status).",
+            "type": "integer",
+            "example": 10
+          },
+          "price": {
+            "description": "Product variant price.",
+            "type": "number",
+            "example": 99
+          },
+          "sku": {
+            "description": "Product variant sku.",
+            "type": "string",
+            "example": "sku-101"
+          },
+          "weight": {
+            "description": "Weight must be greater than or equal to 0.01 Kg, lower than or equal to 999.99 Kg and allow with two decimal place only.",
+            "type": "number",
+            "example": 1
+          }
+        }
+      },
+      "product.ProductVariantOption1Data": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "imageUrl": {
+            "description": "Image URL of product variant option level 1",
+            "type": "string",
+            "example": "https://line.me/image_1.jpg"
+          },
+          "value": {
+            "description": "Value of product variant option level 1",
+            "type": "string",
+            "example": "red"
+          }
+        }
+      },
+      "product.ProductVariantOption2Data": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "description": "Value of product variant option level 2",
+            "type": "string",
+            "example": "M"
+          }
+        }
+      },
+      "product.ProductVariantOptions": {
+        "type": "object",
+        "required": [
+          "option1"
+        ],
+        "properties": {
+          "option1": {
+            "$ref": "#/components/schemas/product.ProductVariantOptions1"
+          },
+          "option2": {
+            "$ref": "#/components/schemas/product.ProductVariantOptions2"
+          }
+        }
+      },
+      "product.ProductVariantOptions1": {
+        "type": "object",
+        "required": [
+          "data",
+          "name"
+        ],
+        "properties": {
+          "data": {
+            "description": "array of variant option such as Red, Blue, Green",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/product.ProductVariantOption1Data"
+            }
+          },
+          "name": {
+            "description": "variant name such as Color",
+            "type": "string",
+            "example": "color"
+          }
+        }
+      },
+      "product.ProductVariantOptions2": {
+        "type": "object",
+        "required": [
+          "data",
+          "name"
+        ],
+        "properties": {
+          "data": {
+            "description": "array of variant option such as S, M, L",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/product.ProductVariantOption2Data"
+            }
+          },
+          "name": {
+            "description": "variant name such as Size",
+            "type": "string",
+            "example": "size"
+          }
+        }
+      },
+      "product.ProductVariantPriceUpdateRequest": {
+        "type": "object",
+        "required": [
+          "price"
+        ],
+        "properties": {
+          "id": {
+            "description": "Product variant id",
+            "type": "integer",
+            "example": 100
+          },
+          "price": {
+            "description": "Product price",
+            "type": "number",
+            "maximum": 99999999,
+            "minimum": 1,
+            "example": 999
+          }
+        }
+      },
+      "product.Response": {
+        "type": "object",
+        "properties": {
+          "brand": {
+            "description": "Product brand",
+            "type": "string"
+          },
+          "category": {
+            "description": "Category Object",
+            "$ref": "#/components/schemas/product.Category"
+          },
+          "code": {
+            "description": "Product code",
+            "type": "string"
+          },
+          "description": {
+            "description": "Product description with HTML formatting support",
+            "type": "string"
+          },
+          "giftGroups": {
+            "description": "Gift Groups of product",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/product.GiftGroup"
+            }
+          },
+          "giftOption": {
+            "description": "Product Gift Option",
+            "type": "string",
+            "enum": [
+              "NO_GIFT",
+              "ALLOW_GIFT",
+              "GIFT_ONLY"
+            ]
+          },
+          "hasOnlyDefaultVariant": {
+            "description": "If product doesn't have any variant will be returned 'true'",
+            "type": "boolean"
+          },
+          "id": {
+            "description": "Identifying number of product",
+            "type": "integer"
+          },
+          "imageUrls": {
+            "description": "Product image urls",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "instantDiscount": {
+            "description": "If product doesn't have instant discount will be returned '0' otherwise returned with number",
+            "type": "number"
+          },
+          "isDisplay": {
+            "description": "If product is displaying on storefront will be returned 'true'",
+            "type": "boolean"
+          },
+          "licenses": {
+            "description": "The list of licenses for your product",
+            "$ref": "#/components/schemas/product.Licenses"
+          },
+          "name": {
+            "description": "Product name",
+            "type": "string"
+          },
+          "variantOptions": {
+            "description": "Product options such as size or color",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/product.VariantOption"
+            }
+          },
+          "variants": {
+            "description": "Product variants",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/product.Variant"
+            }
+          }
+        }
+      },
+      "product.SubVariant": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Option such as color",
+            "type": "string"
+          },
+          "value": {
+            "description": "Option value such as red, green, blue, etc.",
+            "type": "string"
+          }
+        }
+      },
+      "product.UpdateProductDetailsRequest": {
+        "type": "object",
+        "properties": {
+          "brand": {
+            "description": "Product brand",
+            "type": "string",
+            "example": "productBand"
+          },
+          "categoryId": {
+            "description": "Product category id",
+            "type": "integer",
+            "example": 1
+          },
+          "code": {
+            "description": "Product code",
+            "type": "string",
+            "example": "productCode-123-456"
+          },
+          "description": {
+            "description": "Product description with HTML formatting support",
+            "type": "string",
+            "example": "description"
+          },
+          "imageUrls": {
+            "description": "Product image urls",
+            "type": "array",
+            "maxItems": 7,
+            "minItems": 1,
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "https://line.me/image_1.jpg"
+            ]
+          },
+          "licenses": {
+            "description": "The list of licenses for your product.",
+            "$ref": "#/components/schemas/product.ProductLicenseRequest"
+          },
+          "name": {
+            "description": "Product name",
+            "type": "string",
+            "example": "productName"
+          },
+          "variantOptions": {
+            "description": "Product variant options",
+            "$ref": "#/components/schemas/ProductVariantOptions"
+          }
+        }
+      },
+      "product.UpdateProductDetailsResponse": {
+        "type": "object",
+        "properties": {
+          "brand": {
+            "description": "Product brand",
+            "type": "string"
+          },
+          "category": {
+            "description": "Category Object",
+            "$ref": "#/components/schemas/product.Category"
+          },
+          "code": {
+            "description": "Product code",
+            "type": "string"
+          },
+          "description": {
+            "description": "Product description with HTML formatting support",
+            "type": "string"
+          },
+          "giftGroups": {
+            "description": "Gift Groups of product",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/product.GiftGroup"
+            }
+          },
+          "giftOption": {
+            "description": "Product Gift Option",
+            "type": "string",
+            "enum": [
+              "NO_GIFT",
+              "ALLOW_GIFT",
+              "GIFT_ONLY"
+            ]
+          },
+          "hasOnlyDefaultVariant": {
+            "description": "If product doesn't have any variant will be returned 'true'",
+            "type": "boolean"
+          },
+          "id": {
+            "description": "Identifying number of product",
+            "type": "integer"
+          },
+          "imageUrls": {
+            "description": "Product image urls",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "instantDiscount": {
+            "description": "If product doesn't have instant discount will be returned '0' otherwise returned with number",
+            "type": "number"
+          },
+          "isDisplay": {
+            "description": "If product is displaying on storefront will be returned 'true'",
+            "type": "boolean"
+          },
+          "licenses": {
+            "description": "The list of licenses for your product",
+            "$ref": "#/components/schemas/product.Licenses"
+          },
+          "name": {
+            "description": "Product name",
+            "type": "string"
+          },
+          "variantOptions": {
+            "description": "Product options such as size or color",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/product.VariantOption"
+            }
+          },
+          "variants": {
+            "description": "Product variants",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/product.Variant"
+            }
+          }
+        }
+      },
+      "product.Variant": {
+        "type": "object",
+        "properties": {
+          "availableNumber": {
+            "description": "Quantity that is available and display on the storefront  (Exclude \u2018Reserved\u2019 and \u2018Ready to ship\u2019 status)",
+            "type": "integer"
+          },
+          "barcode": {
+            "description": "Product barcode",
+            "type": "string"
+          },
+          "discountedPrice": {
+            "description": "Product price after applying instant discount",
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {}
+            ]
+          },
+          "id": {
+            "description": "Product variant id",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {}
+            ]
+          },
+          "imageUrl": {
+            "description": "Product variant's image url",
+            "type": "string"
+          },
+          "inventoryId": {
+            "description": "Identifying number of inventory",
+            "type": "integer"
+          },
+          "onHandNumber": {
+            "description": "Quantity in stock (Include \u2018Reserved\u2019 and \u2018Ready to ship\u2019 status)",
+            "type": "integer"
+          },
+          "options": {
+            "description": "Product variant's options",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/product.SubVariant"
+            }
+          },
+          "price": {
+            "description": "Product price",
+            "type": "number"
+          },
+          "readyToShipNumber": {
+            "description": "Quantity that customers complete payment and wait to ship",
+            "type": "integer"
+          },
+          "reservedNumber": {
+            "description": "Quantity that customers do not complete payment",
+            "type": "integer"
+          },
+          "sku": {
+            "description": "Product sku",
+            "type": "string"
+          },
+          "weight": {
+            "description": "Product weight",
+            "type": "number",
+            "example": 1
+          }
+        }
+      },
+      "product.VariantOption": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "Option name such as size",
+            "type": "string"
+          },
+          "values": {
+            "description": "Option values such as S, M, L, XL, etc",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "product.productVariantCreateRequest": {
+        "type": "object",
+        "required": [
+          "variantOptions",
+          "variants"
+        ],
+        "properties": {
+          "variantOptions": {
+            "description": "Product variant options for designating the variant",
+            "$ref": "#/components/schemas/product.ProductVariantOptions"
+          },
+          "variants": {
+            "description": "Product variant template",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/product.ProductVariant"
+            }
+          }
+        }
+      },
+      "settlement.OrderIncomeDetail": {
+        "type": "object",
+        "properties": {
+          "WHT": {
+            "description": "Withholding tax amount, deduct 3% from the payout by platform",
+            "type": "number"
+          },
+          "orderIncome": {
+            "description": "Total order income",
+            "type": "number"
+          },
+          "serviceFee": {
+            "description": "Service fee",
+            "type": "number"
+          },
+          "totalPayByBuyer": {
+            "description": "Total pay by buyer",
+            "type": "number"
+          },
+          "totalPayByPlatForm": {
+            "description": "Total pay by platform (eg. LINE SHOPPING coupon)",
+            "type": "number"
+          },
+          "transactionFee": {
+            "description": "Transaction fee",
+            "type": "number"
+          },
+          "vatAmount": {
+            "description": "VAT",
+            "type": "number"
+          }
+        }
+      },
+      "settlement.SettlementDetail": {
+        "type": "object",
+        "properties": {
+          "payoutBalance": {
+            "description": "Payout balance",
+            "type": "number"
+          },
+          "pendingBalance": {
+            "description": "Pending payout balance",
+            "type": "number"
+          },
+          "settlementDate": {
+            "description": "Settlement date",
+            "type": "string"
+          },
+          "settlementIds": {
+            "description": "List of settlement id",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "settlementStatus": {
+            "description": "Settlement Status",
+            "type": "string",
+            "enum": [
+              "PENDING_SHIPMENT",
+              "PENDING_SETTLEMENT",
+              "PARTIAL_COMPLETED",
+              "COMPLETED",
+              "REFUND_TO_BUYER",
+              "UNDER_INVESTIGATE",
+              "SUSPENDED"
+            ]
+          }
+        }
+      },
+      "settlement.SettlementResponse": {
+        "type": "object",
+        "properties": {
+          "orderIncomeDetail": {
+            "description": "Order income detail",
+            "$ref": "#/components/schemas/settlement.OrderIncomeDetail"
+          },
+          "orderNumber": {
+            "description": "Order number",
+            "type": "string"
+          },
+          "settlementDetail": {
+            "description": "Settlement detail",
+            "$ref": "#/components/schemas/settlement.SettlementDetail"
+          }
+        }
+      }
+    }
+  }
+}
