@@ -1,5 +1,8 @@
 # VS Code workspace settings
 .vscode/
+!.vscode/
+.vscode/*
+!.vscode/mcp.json
 
 # Python cache and bytecode
 __pycache__/

@@ -2542,6 +2542,7 @@
             "description": "Shipment type",
             "type": "string",
             "enum": [
+              "",
               "STANDARD",
               "COD",
               "MESSENGER"

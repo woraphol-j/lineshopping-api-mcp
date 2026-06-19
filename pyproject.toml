@@ -7,8 +7,6 @@ authors = [
     {name = "Woraphol", email = "woraphol.j@gmail.com"}
 ]
 license = {text = "MIT"}
-homepage = "https://github.com/woraphol-j/lineshopping-api-mcp"
-repository = "https://github.com/woraphol-j/lineshopping-api-mcp"
 keywords = ["mcp", "line-shopping", "api", "ai-agent", "model-context-protocol"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -23,12 +21,16 @@ classifiers = [
 ]
 requires-python = ">=3.11"
 dependencies = [
-    "fastmcp>=2.12.0",
+    "fastmcp>=3.4.2",
     "httpx>=0.25.0",
 ]
 
 [project.scripts]
 lineshopping-mcp = "lineshopping_api_mcp.app:main"
+
+[project.urls]
+Homepage = "https://github.com/woraphol-j/lineshopping-api-mcp"
+Repository = "https://github.com/woraphol-j/lineshopping-api-mcp"
 
 [build-system]
 requires = ["hatchling"]
