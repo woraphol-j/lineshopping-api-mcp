@@ -14,9 +14,9 @@ MCP Server for the LINE Shopping API, enabling AI agents and tools to interact w
 
 ## Prerequisites
 
-1. Python >= 3.13
+1. Python >= 3.11
 2. [uv](https://github.com/astral-sh/uv) (Python package manager)
-3. LINE Shopping API Key (`X_API_KEY`)
+3. LINE Shopping API key, supplied in the MCP request's `X-API-KEY` header or through the optional `X_API_KEY` environment variable
 
 
 ## Installation
@@ -26,15 +26,8 @@ MCP Server for the LINE Shopping API, enabling AI agents and tools to interact w
 Install and run directly from PyPI using `uvx`:
 
 ```sh
-# Install and run the MCP server (note the different executable name)
+# Run the Streamable HTTP server at http://127.0.0.1:8000/mcp/
 uvx --from lineshopping-api-mcp lineshopping-mcp
-```
-
-Or run with environment variables:
-
-```sh
-# Set your API key and run
-X_API_KEY=your_api_key_here uvx --from lineshopping-api-mcp lineshopping-mcp
 ```
 
 ### Method 2: Clone and Run
@@ -47,28 +40,36 @@ X_API_KEY=your_api_key_here uvx --from lineshopping-api-mcp lineshopping-mcp
 
 2. **Install dependencies:**
 	```sh
-	uv add fastmcp httpx
+	uv sync
 	```
 
 3. **Run the server:**
 	```sh
-	# Set your API key and run
-	X_API_KEY=your_api_key_here uv run --with fastmcp fastmcp run app.py
+	uv run fastmcp run app.py --transport streamable-http --host 127.0.0.1 --port 8000 --path /mcp/
 	```
 
-### Environment Configuration
+### Authentication
 
-For persistent configuration, create a `.env` file in your working directory:
-```env
-X_API_KEY=your_api_key_here
+LINE API tool calls need the merchant's API key in the incoming MCP request:
+
+```http
+X-API-KEY: <merchant-api-key>
 ```
+
+The server forwards this header to the corresponding OAPlus API request. If the `X_API_KEY` environment variable is set to a non-blank value, it takes precedence over the request header. Otherwise, each request can provide its own key. A missing key fails the LINE API tool call; MCP initialization and tool discovery do not require one.
 
 
 ## Configuration & Integration
 
-### Using uvx (PyPI Installation)
+### Connect an MCP client
 
-Configure your agent to use the PyPI-installed package:
+Start the local Streamable HTTP server:
+
+```sh
+uv run fastmcp run app.py --transport streamable-http --host 127.0.0.1 --port 8000 --path /mcp/
+```
+
+Configure the client to send its merchant key as an HTTP header:
 
 ```jsonc
 {
@@ -82,96 +83,61 @@ Configure your agent to use the PyPI-installed package:
 	],
 	"servers": {
 		"LINE Shopping API MCP": {
-			"command": "uvx",
-			"args": [
-				"--from",
-				"lineshopping-api-mcp",
-				"lineshopping-mcp"
-			],
-			"env": {
-				"X_API_KEY": "${input:line-shopping-api-key}"
+			"type": "http",
+			"url": "http://127.0.0.1:8000/mcp/",
+			"headers": {
+				"X-API-KEY": "${input:line-shopping-api-key}"
 			}
 		}
 	}
 }
 ```
 
-### Using Local Clone
-
-For local development or cloned repository:
-
-```jsonc
-{
-	"inputs": [
-		{
-			"type": "promptString",
-			"id": "line-shopping-api-key",
-			"description": "LINE Shopping API Key",
-			"password": true
-		}
-	],
-	"servers": {
-		"LINE Shopping API MCP": {
-			"command": "uv",
-			"args": [
-				"run",
-				"--with",
-				"fastmcp",
-				"fastmcp",
-				"run",
-				"/Users/xxx/lineshopping-api-mcp/app.py"
-			],
-			"env": {
-				"X_API_KEY": "${input:line-shopping-api-key}",
-				"FASTMCP_EXPERIMENTAL_ENABLE_NEW_OPENAPI_PARSER": "true"
-			}
-		}
-	}
-}
-```
+For GitHub repository MCP settings, configure a reachable Streamable HTTP endpoint. GitHub's cloud agent cannot reach a local `127.0.0.1` server directly.
 
 ## Available Tools
 
-The following tools are exposed by the MCP server (see `openapi.json` for full details):
+The following tools are generated from the packaged OpenAPI spec at [`lineshopping_api_mcp/openapi.json`](./lineshopping_api_mcp/openapi.json):
 
 ### Checkout & Links
-- `create-checkout-link`: Generate a checkout link for order items
+- `Create_checkout_link`: Generate a checkout link for order items
 
 ### Inventory Management
-- `adjust-inventory`: Adjust inventory by ID
-- `decrease-inventory`: Decrease inventory by ID
-- `increase-inventory`: Increase inventory by ID
+- `Adjust_inventory`: Adjust inventory by ID
+- `Decrease_inventory`: Decrease inventory by ID
+- `Increase_inventory`: Increase inventory by ID
 
 ### Order Management
-- `get-orders`: List orders with advanced filtering
-- `get-order-detail`: Get details for a specific order
-- `cancel-order`: Cancel an order
-- `mark-order-paid`: Mark order as paid (COD)
-- `mark-order-shipped`: Mark order as shipped and add tracking number
-- `print-parcel-label`: Download parcel label for an order
-- `send-order-message`: Send message via OA Plus flex message
-- `update-shipment`: Update shipping tracking number
+- `Get_all_orders`: List orders with advanced filtering
+- `Order_detail`: Get details for a specific order
+- `Cancel_Order`: Cancel an order
+- `Confirm_order_delivery`: Confirm order delivery
+- `Mark_as_paid_COD`: Mark order as paid (COD)
+- `Mark_as_ship`: Mark order as shipped
+- `Print_parcel_label`: Download parcel label for an order
+- `Send_message_via_OA_Plus_flex_message_services`: Send an OA Plus message
+- `Update_tracking_number`: Update the shipment tracking number
 
 ### Product Management
-- `get-products`: List/search products
-- `create-product`: Create a new product
-- `delete-product`: Delete a product
-- `update-product-detail`: Update product details
-- `delete-product-variant`: Delete a product variant
-- `update-product-display-status`: Update product's display status (onsale/hide)
-- `update-product-price`: Update product price and instant discount
-- `update-product-variant-detail`: Update product variant details
-- `create-product-variants`: Create product variants
+- `Get_all_products`: List/search products
+- `Create_product`: Create a product
+- `Delete_product`: Delete a product
+- `Update_product_detail`: Update product details
+- `Delete_product_variant`: Delete a product variant
+- `Update_products_display_status`: Update product display status
+- `Update_product_price`: Update product price and instant discount
+- `Update_product_variant_detail`: Update product variant details
+- `Create_product_variants`: Create product variants
 
 ### Settlement
-- `get-settlement-detail`: Get settlement details for an order
+- `Settlement_detail`: Get settlement details for an order
 
-Refer to [`openapi.json`](./openapi.json) for all available tools, input parameters, and response formats.
+The server loads the packaged OpenAPI file above. The root-level [`openapi.json`](./openapi.json) is only a fallback if the packaged file is absent.
 
 ## Debugging
 
 If you run into issues, check your agent platform's MCP logs for errors. Common issues:
-- **Authentication Errors**: Verify your API key and environment variable setup
+- **Authentication Errors**: Verify the `X-API-KEY` request header or optional `X_API_KEY` environment variable
 - **API Errors**: Check rate limits, input formats, and required fields
 
 
@@ -185,10 +151,10 @@ git clone https://github.com/woraphol-j/lineshopping-api-mcp.git
 cd lineshopping-api-mcp
 
 # Install dependencies
-uv add fastmcp httpx
+uv sync
 
 # Run the server (with fastmcp)
-X_API_KEY=your_api_key_here uv run --with fastmcp fastmcp run app.py
+uv run fastmcp run app.py --transport streamable-http --host 127.0.0.1 --port 8000 --path /mcp/
 ```
 
 ### Building and Publishing
@@ -211,4 +177,4 @@ uv publish --token your_pypi_token
 MIT
 
 ---
-This project is not an HTTP REST API server. It is an MCP server for agent integrations. For more details, see [FastMCP](https://github.com/line/fastmcp) and [LINE Shopping API](https://developers-oaplus.line.biz).
+This project is not an HTTP REST API server. It is an MCP server for agent integrations. For more details, see [FastMCP](https://gofastmcp.com/) and [LINE Shopping API](https://developers-oaplus.line.biz).
