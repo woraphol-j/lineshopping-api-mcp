@@ -1,40 +1,24 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.3",
   "info": {
+    "description": "This is a MyShop Open API document",
+    "title": "MyShop Open API",
     "contact": {},
-    "title": "ECT Open API",
-    "version": "1.0.0"
+    "version": "1.0"
   },
-  "servers": [
-    {
-      "url": "https://developers-oaplus.line.biz",
-      "description": "LINE Shopping API"
-    }
-  ],
   "paths": {
     "/myshop/v1/checkout-link": {
       "post": {
-        "summary": "Create checkout link",
-        "description": "An API for generate checkout link.",
-        "tags": [
-          "MyShopOpenApiCheckoutLink"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
-        "requestBody": {
-          "description": " ",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/checkout_link.CheckoutLinkCreateRequest"
-              }
-            }
-          }
-        },
+        "description": "An API for generate checkout link.",
+        "tags": [
+          "MyShopOpenApiCheckoutLink"
+        ],
+        "summary": "Create checkout link",
         "responses": {
           "200": {
             "description": "Success",
@@ -76,26 +60,79 @@
               }
             }
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/checkout_link.CheckoutLinkCreateRequest"
+              }
+            }
+          },
+          "description": " ",
+          "required": true
         }
       }
     },
     "/myshop/v1/inventory/{id}/adjust": {
       "put": {
-        "summary": "Adjust inventory",
-        "description": "API for updating inventory by adjusting the inventory amount from the current inventory on hand.",
-        "tags": [
-          "MyShopOpenApiInventory"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
+        "description": "API for updating inventory by adjusting the inventory amount from the current inventory on hand.",
+        "tags": [
+          "MyShopOpenApiInventory"
+        ],
+        "summary": "Adjust inventory",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/inventory.UpdateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        },
         "parameters": [
           {
+            "description": "Inventory ID",
             "name": "id",
             "in": "path",
-            "description": "Inventory ID",
             "required": true,
             "schema": {
               "type": "integer"
@@ -103,16 +140,30 @@
           }
         ],
         "requestBody": {
-          "description": "Adjust inventory request",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/inventory.AdjustRequest"
               }
             }
+          },
+          "description": "Adjust inventory request",
+          "required": true
+        }
+      }
+    },
+    "/myshop/v1/inventory/{id}/decrease": {
+      "put": {
+        "security": [
+          {
+            "X-API-KEY": []
           }
-        },
+        ],
+        "description": "API for updating inventory by decreasing the inventory amount from the current inventory on hand.",
+        "tags": [
+          "MyShopOpenApiInventory"
+        ],
+        "summary": "Decrease inventory",
         "responses": {
           "200": {
             "description": "Success",
@@ -154,26 +205,12 @@
               }
             }
           }
-        }
-      }
-    },
-    "/myshop/v1/inventory/{id}/decrease": {
-      "put": {
-        "summary": "Decrease inventory",
-        "description": "API for updating inventory by decreasing the inventory amount from the current inventory on hand.",
-        "tags": [
-          "MyShopOpenApiInventory"
-        ],
-        "security": [
-          {
-            "X-API-KEY": []
-          }
-        ],
+        },
         "parameters": [
           {
+            "description": "Inventory ID",
             "name": "id",
             "in": "path",
-            "description": "Inventory ID",
             "required": true,
             "schema": {
               "type": "integer"
@@ -181,16 +218,30 @@
           }
         ],
         "requestBody": {
-          "description": "Decrease inventory request",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/inventory.DecreaseRequest"
               }
             }
+          },
+          "description": "Decrease inventory request",
+          "required": true
+        }
+      }
+    },
+    "/myshop/v1/inventory/{id}/increase": {
+      "put": {
+        "security": [
+          {
+            "X-API-KEY": []
           }
-        },
+        ],
+        "description": "API for updating inventory by increasing the inventory amount from the current inventory on hand.",
+        "tags": [
+          "MyShopOpenApiInventory"
+        ],
+        "summary": "Increase inventory",
         "responses": {
           "200": {
             "description": "Success",
@@ -232,26 +283,12 @@
               }
             }
           }
-        }
-      }
-    },
-    "/myshop/v1/inventory/{id}/increase": {
-      "put": {
-        "summary": "Increase inventory",
-        "description": "API for updating inventory by increasing the inventory amount from the current inventory on hand.",
-        "tags": [
-          "MyShopOpenApiInventory"
-        ],
-        "security": [
-          {
-            "X-API-KEY": []
-          }
-        ],
+        },
         "parameters": [
           {
+            "description": "Inventory ID",
             "name": "id",
             "in": "path",
-            "description": "Inventory ID",
             "required": true,
             "schema": {
               "type": "integer"
@@ -259,241 +296,30 @@
           }
         ],
         "requestBody": {
-          "description": "Increase inventory request",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/inventory.IncreaseRequest"
               }
             }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/inventory.UpdateResponse"
-                }
-              }
-            }
           },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/api.Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/api.Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/api.Error"
-                }
-              }
-            }
-          }
+          "description": "Increase inventory request",
+          "required": true
         }
       }
     },
     "/myshop/v1/orders": {
       "get": {
-        "summary": "Get all orders",
-        "description": "An API for getting a list of orders by condition",
-        "tags": [
-          "MyShopOpenApiOrder"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
-        "parameters": [
-          {
-            "name": "search",
-            "in": "query",
-            "description": "For searching the 'customer name' or 'order number' that partial match the given keyword",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "description": "For pagination, page is the page number to query the list of orders",
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "perPage",
-            "in": "query",
-            "description": "For pagination, per page is the number of showing orders on a page",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 100
-            }
-          },
-          {
-            "name": "sortBy",
-            "in": "query",
-            "description": "For sorting of results by specific field",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "ORDER_NO",
-                "CREATED_AT",
-                "UPDATED_AT",
-                "CHECKED_OUT_AT"
-              ]
-            }
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "description": "To define whether results are sorted in ascending or descending order",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "DESC",
-                "ASC"
-              ]
-            }
-          },
-          {
-            "name": "orderStatus",
-            "in": "query",
-            "description": "Filtered by multiple values of order status",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "PENDING",
-                  "CONFIRMED",
-                  "SHIPPED",
-                  "COMPLETED",
-                  "CANCELLED"
-                ]
-              }
-            }
-          },
-          {
-            "name": "paymentStatus",
-            "in": "query",
-            "description": "Filtered by multiple values of payment status",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "PENDING",
-                  "PAID",
-                  "FAILED",
-                  "REFUNDED"
-                ]
-              }
-            }
-          },
-          {
-            "name": "paymentMethod",
-            "in": "query",
-            "description": "Filtered by multiple values of payment method",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "CREDIT_CARD",
-                  "BANK_TRANSFER",
-                  "COD",
-                  "WALLET"
-                ]
-              }
-            }
-          },
-          {
-            "name": "shipmentStatus",
-            "in": "query",
-            "description": "Filtered by multiple values of shipment status",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "PENDING",
-                  "PROCESSING",
-                  "SHIPPED",
-                  "DELIVERED"
-                ]
-              }
-            }
-          },
-          {
-            "name": "orderType",
-            "in": "query",
-            "description": "Filtered by multiple values of order type",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "enum": [
-                  "NORMAL",
-                  "GIFT",
-                  "SUBSCRIPTION"
-                ]
-              }
-            }
-          },
-          {
-            "name": "startAt",
-            "in": "query",
-            "description": "Filtered by starting point of updated time. Example value is '2022-01-01T09:30:00Z'",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "format": "yyyy-mm-ddThh:mm[:ss[.fff]]Z"
-            }
-          },
-          {
-            "name": "endAt",
-            "in": "query",
-            "description": "Filtered by ending point of updated time. Example value is '2022-01-01T09:30:00Z'",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "format": "yyyy-mm-ddThh:mm[:ss[.fff]]Z"
-            }
-          }
+        "description": "An API for getting a list of orders by condition",
+        "tags": [
+          "MyShopOpenApiOrder"
         ],
+        "summary": "Get all orders",
         "responses": {
           "200": {
             "description": "Success",
@@ -535,32 +361,197 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "description": "For searching the 'customer name' or 'order number' that partial match the given keyword",
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "For pagination, page is the page number to query the list of orders",
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "description": "For pagination, per page is the number of showing orders on a page",
+            "name": "perPage",
+            "in": "query",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "default": 25
+            }
+          },
+          {
+            "description": "For sorting of results by specific field",
+            "name": "sortBy",
+            "in": "query",
+            "schema": {
+              "enum": [
+                "ORDER_NO",
+                "CREATED_AT",
+                "UPDATED_AT",
+                "CHECKED_OUT_AT"
+              ],
+              "type": "string",
+              "default": "ORDER_NO"
+            }
+          },
+          {
+            "description": "To define whether results are sorted in ascending or descending order",
+            "name": "orderBy",
+            "in": "query",
+            "schema": {
+              "enum": [
+                "DESC",
+                "ASC"
+              ],
+              "type": "string",
+              "default": "DESC"
+            }
+          },
+          {
+            "description": "Filtered by multiple values of order status",
+            "name": "orderStatus",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "FINALIZED",
+                  "COMPLETED",
+                  "EXPIRED",
+                  "CANCELED"
+                ],
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "description": "Filtered by multiple values of payment status",
+            "name": "paymentStatus",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "NO_PAYMENT",
+                  "PENDING",
+                  "PAID",
+                  "REFUND",
+                  "PENDING_REFUND",
+                  "FAILED_REFUND",
+                  "FAILED_AFTER_PAID",
+                  "REJECTED_REFUND"
+                ],
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "description": "Filtered by multiple values of payment method",
+            "name": "paymentMethod",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "BANK",
+                  "COD",
+                  "PAYMENT_LS_RLP",
+                  "PAYMENT_LS_MOBILE_BANKING_KPLUS",
+                  "PAYMENT_LS_MOBILE_BANKING_SCB",
+                  "PAYMENT_LS_QR_PROMPTPAY"
+                ],
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "description": "Filtered by multiple values of shipment status",
+            "name": "shipmentStatus",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "NO_SHIPMENT",
+                  "PENDING",
+                  "SHIPMENT_READY",
+                  "ON_DELIVERY",
+                  "SHIPPED_ALL"
+                ],
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "description": "Filtered by multiple values of order type",
+            "name": "orderType",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "NORMAL",
+                  "GIFT"
+                ],
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "description": "Filtered by starting point of updated time. Example value is '2022-01-01T09:30:00Z'",
+            "name": "startAt",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "yyyy-mm-ddThh:mm[:ss[.fff]]Z"
+            }
+          },
+          {
+            "description": "Filtered by ending point of updated time. Example value is '2022-01-01T09:30:00Z'",
+            "name": "endAt",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "yyyy-mm-ddThh:mm[:ss[.fff]]Z"
+            }
+          }
+        ]
       }
     },
     "/myshop/v1/orders/{orderNo}": {
       "get": {
-        "summary": "Order detail",
-        "description": "An API for getting an order detail",
-        "tags": [
-          "MyShopOpenApiOrder"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
-        "parameters": [
-          {
-            "name": "orderNo",
-            "in": "path",
-            "description": "Order number",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
+        "description": "An API for getting an order detail",
+        "tags": [
+          "MyShopOpenApiOrder"
         ],
+        "summary": "Order detail",
         "responses": {
           "200": {
             "description": "Success",
@@ -602,26 +593,89 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "description": "Order number",
+            "name": "orderNo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     },
     "/myshop/v1/orders/{orderNo}/cancel": {
       "put": {
-        "summary": "Cancel Order",
-        "description": "An API for cancel order.",
-        "tags": [
-          "MyShopOpenApiOrder"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
+        "description": "An API for cancel order.",
+        "tags": [
+          "MyShopOpenApiOrder"
+        ],
+        "summary": "Cancel Order",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/order.Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        },
         "parameters": [
           {
+            "description": "Order number",
             "name": "orderNo",
             "in": "path",
-            "description": "Order number",
             "required": true,
             "schema": {
               "type": "integer"
@@ -629,23 +683,37 @@
           }
         ],
         "requestBody": {
-          "description": "Cancel order request",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/order.CancelRequest"
               }
             }
+          },
+          "description": "Cancel order request",
+          "required": true
+        }
+      }
+    },
+    "/myshop/v1/orders/{orderNo}/confirm-delivery": {
+      "post": {
+        "security": [
+          {
+            "X-API-KEY": []
           }
-        },
+        ],
+        "description": "Save the delivery confirmation details for an order",
+        "tags": [
+          "MyShopOpenApiOrder"
+        ],
+        "summary": "Confirm order delivery",
         "responses": {
           "200": {
             "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/order.Response"
+                  "$ref": "#/components/schemas/order.ConfirmDeliveryResponse"
                 }
               }
             }
@@ -690,32 +758,43 @@
               }
             }
           }
+        },
+        "parameters": [
+          {
+            "description": "Order number",
+            "name": "orderNo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/order.ConfirmDeliveryRequest"
+              }
+            }
+          },
+          "description": "Delivery confirmation details",
+          "required": true
         }
       }
     },
     "/myshop/v1/orders/{orderNo}/mark-as-paid": {
       "post": {
-        "summary": "Mark as paid (COD)",
-        "description": "Update order status to Complete by Mark payment status as Paid to the selected order that payment method is COD",
-        "tags": [
-          "MyShopOpenApiOrder"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
-        "parameters": [
-          {
-            "name": "orderNo",
-            "in": "path",
-            "description": "Order number",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
+        "description": "Update order status to Complete by Mark payment status as Paid to the selected order that payment method is COD",
+        "tags": [
+          "MyShopOpenApiOrder"
         ],
+        "summary": "Mark as paid (COD)",
         "responses": {
           "200": {
             "description": "Success",
@@ -767,26 +846,89 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "description": "Order number",
+            "name": "orderNo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
       }
     },
     "/myshop/v1/orders/{orderNo}/mark-as-ship": {
       "post": {
-        "summary": "Mark as ship",
-        "description": "Update order status to Complete by Mark shipment status as shipped and add tracking number",
-        "tags": [
-          "MyShopOpenApiOrder"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
+        "description": "Update order status to Complete by Mark shipment status as shipped and add tracking number",
+        "tags": [
+          "MyShopOpenApiOrder"
+        ],
+        "summary": "Mark as ship",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/order.Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        },
         "parameters": [
           {
+            "description": "Order number",
             "name": "orderNo",
             "in": "path",
-            "description": "Order number",
             "required": true,
             "schema": {
               "type": "integer"
@@ -794,23 +936,37 @@
           }
         ],
         "requestBody": {
-          "description": "Mark as ship request",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/order.MarkAsShipRequest"
               }
             }
+          },
+          "description": "Mark as ship request",
+          "required": true
+        }
+      }
+    },
+    "/myshop/v1/orders/{orderNo}/messages/push": {
+      "post": {
+        "security": [
+          {
+            "X-API-KEY": []
           }
-        },
+        ],
+        "description": "Send message api is a proxy message services that receive message object and forward to flex message api",
+        "tags": [
+          "MyShopOpenApiOrder"
+        ],
+        "summary": "Send message via OA Plus flex message services",
         "responses": {
           "200": {
             "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/order.Response"
+                  "$ref": "#/components/schemas/order.SendMessageResponse"
                 }
               }
             }
@@ -855,43 +1011,43 @@
               }
             }
           }
+        },
+        "parameters": [
+          {
+            "description": "Order number",
+            "name": "orderNo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/order.OrderMessageRequest"
+              }
+            }
+          },
+          "description": "Order message request",
+          "required": true
         }
       }
     },
     "/myshop/v1/orders/{orderNo}/parcel-label": {
       "post": {
-        "summary": "Print parcel label",
-        "description": "An API for downloading parcel label.",
-        "tags": [
-          "MyShopOpenApiOrder"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
-        "parameters": [
-          {
-            "name": "orderNo",
-            "in": "path",
-            "description": "Order number",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
+        "description": "An API for downloading parcel label.",
+        "tags": [
+          "MyShopOpenApiOrder"
         ],
-        "requestBody": {
-          "description": "Parcel Label request",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/order.ParcelLabelRequest"
-              }
-            }
-          }
-        },
+        "summary": "Print parcel label",
         "responses": {
           "200": {
             "description": "Success",
@@ -946,26 +1102,12 @@
               }
             }
           }
-        }
-      }
-    },
-    "/myshop/v1/orders/{orderNo}/send-message": {
-      "put": {
-        "summary": "Send message via OA Plus flex message services",
-        "description": "Send message api is a proxy message services that receive message object and forward to flex message api",
-        "tags": [
-          "orders messages put"
-        ],
-        "security": [
-          {
-            "X-API-KEY": []
-          }
-        ],
+        },
         "parameters": [
           {
+            "description": "Order number",
             "name": "orderNo",
             "in": "path",
-            "description": "Order number",
             "required": true,
             "schema": {
               "type": "integer"
@@ -973,104 +1115,30 @@
           }
         ],
         "requestBody": {
-          "description": "Order message request",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/order.OrderMessageRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/order.SendMessageResponse"
-                }
+                "$ref": "#/components/schemas/order.ParcelLabelRequest"
               }
             }
           },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/api.Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/api.Error"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/api.Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/api.Error"
-                }
-              }
-            }
-          }
+          "description": "Parcel Label request",
+          "required": true
         }
       }
     },
     "/myshop/v1/orders/{orderNo}/shipments": {
       "put": {
-        "summary": "Update tracking number",
-        "description": "Update the shipping tracking number for the selected order that the shipment status is Shipped.",
-        "tags": [
-          "MyShopOpenApiOrder"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
-        "parameters": [
-          {
-            "name": "orderNo",
-            "in": "path",
-            "description": "Order number",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
+        "description": "Update the shipping tracking number for the selected order that the shipment status is Shipped.",
+        "tags": [
+          "MyShopOpenApiOrder"
         ],
-        "requestBody": {
-          "description": "Update Shipment request",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/order.UpdateShipmentRequest"
-              }
-            }
-          }
-        },
+        "summary": "Update tracking number",
         "responses": {
           "200": {
             "description": "Success",
@@ -1112,67 +1180,43 @@
               }
             }
           }
+        },
+        "parameters": [
+          {
+            "description": "Order number",
+            "name": "orderNo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/order.UpdateShipmentRequest"
+              }
+            }
+          },
+          "description": "Update Shipment request",
+          "required": true
         }
       }
     },
     "/myshop/v1/products": {
       "get": {
-        "summary": "Get all products",
-        "description": "An API for getting a list of products",
-        "tags": [
-          "MyShopOpenApiProduct"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
-        "parameters": [
-          {
-            "name": "ids",
-            "in": "query",
-            "description": "Filtered by multiple values of product id",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
-            }
-          },
-          {
-            "name": "skus",
-            "in": "query",
-            "description": "Filtered by multiple values of product sku",
-            "required": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "description": "For pagination, page is the page number to query the list of products",
-            "required": false,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "perPage",
-            "in": "query",
-            "description": "For pagination, per page is the number of showing products on a page",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 100
-            }
-          }
+        "description": "An API for getting a list of products",
+        "tags": [
+          "MyShopOpenApiProduct"
         ],
+        "summary": "Get all products",
         "responses": {
           "200": {
             "description": "Success",
@@ -1214,30 +1258,67 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "description": "Filtered by multiple values of product id",
+            "name": "ids",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "description": "Filtered by multiple values of product sku",
+            "name": "skus",
+            "in": "query",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "description": "For pagination, page is the page number to query the list of products",
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "description": "For pagination, per page is the number of showing products on a page",
+            "name": "perPage",
+            "in": "query",
+            "schema": {
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer",
+              "default": 25
+            }
+          }
+        ]
       },
       "post": {
-        "summary": "Create product",
-        "description": "An API for product creation. For product Categories ID variable please find more information on <a href=\"#tag/MyShopDevelopmentGuide\">Development guideline</a>",
-        "tags": [
-          "MyShopOpenApiProduct"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
-        "requestBody": {
-          "description": "create product request",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/product.CreateProductRequest"
-              }
-            }
-          }
-        },
+        "description": "An API for product creation. For product Categories ID variable please find more information on <a href=\"#tag/MyShopDevelopmentGuide\">Development guideline</a>",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "summary": "Create product",
         "responses": {
           "201": {
             "description": "Success",
@@ -1279,32 +1360,32 @@
               }
             }
           }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product.CreateProductRequest"
+              }
+            }
+          },
+          "description": "create product request",
+          "required": true
         }
       }
     },
     "/myshop/v1/products/{id}": {
       "delete": {
-        "summary": "Delete product",
-        "description": "An API for product deletion.",
-        "tags": [
-          "MyShopOpenApiProduct"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Product id",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
+        "description": "An API for product deletion.",
+        "tags": [
+          "MyShopOpenApiProduct"
         ],
+        "summary": "Delete product",
         "responses": {
           "204": {
             "description": "Success, No content"
@@ -1329,41 +1410,30 @@
               }
             }
           }
-        }
-      },
-      "patch": {
-        "summary": "Update product detail",
-        "description": "An API for product detail updating. For product Categories ID variable please find more information on <a href=\"#tag/MyShopDevelopmentGuide\">Development guideline</a>",
-        "tags": [
-          "MyShopOpenApiProduct"
-        ],
-        "security": [
-          {
-            "X-API-KEY": []
-          }
-        ],
+        },
         "parameters": [
           {
+            "description": "Product id",
             "name": "id",
             "in": "path",
-            "description": "Product id",
             "required": true,
             "schema": {
               "type": "integer"
             }
           }
-        ],
-        "requestBody": {
-          "description": "Update product detail request",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/product.UpdateProductDetailsRequest"
-              }
-            }
+        ]
+      },
+      "patch": {
+        "security": [
+          {
+            "X-API-KEY": []
           }
-        },
+        ],
+        "description": "An API for product detail updating. For product Categories ID variable please find more information on <a href=\"#tag/MyShopDevelopmentGuide\">Development guideline</a>",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "summary": "Update product detail",
         "responses": {
           "200": {
             "description": "Success",
@@ -1405,26 +1475,12 @@
               }
             }
           }
-        }
-      }
-    },
-    "/myshop/v1/products/{id}/delete-variant-option": {
-      "post": {
-        "summary": "Delete product variant",
-        "description": "An API for product variant deletion.",
-        "tags": [
-          "MyShopOpenApiProduct"
-        ],
-        "security": [
-          {
-            "X-API-KEY": []
-          }
-        ],
+        },
         "parameters": [
           {
+            "description": "Product id",
             "name": "id",
             "in": "path",
-            "description": "Product id",
             "required": true,
             "schema": {
               "type": "integer"
@@ -1432,16 +1488,30 @@
           }
         ],
         "requestBody": {
-          "description": "delete product variant request",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/product.ProductVariantDeleteRequest"
+                "$ref": "#/components/schemas/product.UpdateProductDetailsRequest"
               }
             }
+          },
+          "description": "Update product detail request",
+          "required": true
+        }
+      }
+    },
+    "/myshop/v1/products/{id}/delete-variant-option": {
+      "post": {
+        "security": [
+          {
+            "X-API-KEY": []
           }
-        },
+        ],
+        "description": "An API for product variant deletion.",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "summary": "Delete product variant",
         "responses": {
           "204": {
             "description": "Success, No content"
@@ -1476,45 +1546,43 @@
               }
             }
           }
+        },
+        "parameters": [
+          {
+            "description": "Product id",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/product.ProductVariantDeleteRequest"
+              }
+            }
+          },
+          "description": "delete product variant request",
+          "required": true
         }
       }
     },
     "/myshop/v1/products/{id}/display-status/{status}": {
       "post": {
-        "summary": "Update product's display status",
-        "description": "An API for product's display status updating.",
-        "tags": [
-          "MyShopOpenApiProduct"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "Product id",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "status",
-            "in": "path",
-            "description": "Product's display status",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "onsale",
-                "hide"
-              ]
-            }
-          }
+        "description": "An API for product's display status updating.",
+        "tags": [
+          "MyShopOpenApiProduct"
         ],
+        "summary": "Update product's display status",
         "responses": {
           "200": {
             "description": "Success",
@@ -1556,26 +1624,92 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "description": "Product id",
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Product's display status",
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "enum": [
+                "onsale",
+                "hide"
+              ],
+              "type": "string"
+            }
+          }
+        ]
       }
     },
     "/myshop/v1/products/{id}/prices": {
       "patch": {
-        "summary": "Update product price",
-        "description": "An API for updating prices and instant discounts on the product. (You can't edit product price and instant discount during the promotion period.)",
-        "tags": [
-          "MyShopOpenApiProduct"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
+        "description": "An API for updating prices and instant discounts on the product. (You can't edit product price and instant discount during the promotion period.)",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "summary": "Update product price",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/product.Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/api.Error"
+                }
+              }
+            }
+          }
+        },
         "parameters": [
           {
+            "description": "Product id",
             "name": "id",
             "in": "path",
-            "description": "Product id",
             "required": true,
             "schema": {
               "type": "integer"
@@ -1583,16 +1717,30 @@
           }
         ],
         "requestBody": {
-          "description": "Update instant discount and variants price",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/product.ProductPriceUpdateValidator"
               }
             }
+          },
+          "description": "Update instant discount and variants price",
+          "required": true
+        }
+      }
+    },
+    "/myshop/v1/products/{id}/variant": {
+      "patch": {
+        "security": [
+          {
+            "X-API-KEY": []
           }
-        },
+        ],
+        "description": "An API for update specific variant detail for both with and without variant product.",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "summary": "Update product variant detail",
         "responses": {
           "200": {
             "description": "Success",
@@ -1634,26 +1782,12 @@
               }
             }
           }
-        }
-      }
-    },
-    "/myshop/v1/products/{id}/variant": {
-      "patch": {
-        "summary": "Update product variant detail",
-        "description": "An API for update specific variant detail for both with and without variant product.",
-        "tags": [
-          "MyShopOpenApiProduct"
-        ],
-        "security": [
-          {
-            "X-API-KEY": []
-          }
-        ],
+        },
         "parameters": [
           {
+            "description": "Product id",
             "name": "id",
             "in": "path",
-            "description": "Product id",
             "required": true,
             "schema": {
               "type": "integer"
@@ -1661,16 +1795,30 @@
           }
         ],
         "requestBody": {
-          "description": "update product variant request",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/product.ProductVariantDetailsUpdateRequest"
               }
             }
+          },
+          "description": "update product variant request",
+          "required": true
+        }
+      }
+    },
+    "/myshop/v1/products/{id}/variants": {
+      "post": {
+        "security": [
+          {
+            "X-API-KEY": []
           }
-        },
+        ],
+        "description": "An API for product variants creation.",
+        "tags": [
+          "MyShopOpenApiProduct"
+        ],
+        "summary": "Create product variants",
         "responses": {
           "200": {
             "description": "Success",
@@ -1712,26 +1860,12 @@
               }
             }
           }
-        }
-      }
-    },
-    "/myshop/v1/products/{id}/variants": {
-      "post": {
-        "summary": "Create product variants",
-        "description": "An API for product variants creation.",
-        "tags": [
-          "MyShopOpenApiProduct"
-        ],
-        "security": [
-          {
-            "X-API-KEY": []
-          }
-        ],
+        },
         "parameters": [
           {
+            "description": "Product id",
             "name": "id",
             "in": "path",
-            "description": "Product id",
             "required": true,
             "schema": {
               "type": "integer"
@@ -1739,83 +1873,30 @@
           }
         ],
         "requestBody": {
-          "description": "create product variant request",
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/product.productVariantCreateRequest"
               }
             }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/product.Response"
-                }
-              }
-            }
           },
-          "400": {
-            "description": "Bad request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/api.Error"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/api.Error"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/api.Error"
-                }
-              }
-            }
-          }
+          "description": "create product variant request",
+          "required": true
         }
       }
     },
     "/myshop/v1/settlements/{orderNo}": {
       "get": {
-        "summary": "Settlement detail",
-        "description": "An API for getting a settlement detail",
-        "tags": [
-          "MyShopOpenApiSettlement"
-        ],
         "security": [
           {
             "X-API-KEY": []
           }
         ],
-        "parameters": [
-          {
-            "name": "orderNo",
-            "in": "path",
-            "description": "Order number",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
+        "description": "An API for getting a settlement detail",
+        "tags": [
+          "MyShopOpenApiSettlement"
         ],
+        "summary": "Settlement detail",
         "responses": {
           "200": {
             "description": "Success",
@@ -1857,18 +1938,22 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "description": "Order number",
+            "name": "orderNo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
       }
     }
   },
   "components": {
-    "securitySchemes": {
-      "X-API-KEY": {
-        "type": "apiKey",
-        "in": "header",
-        "name": "X-API-KEY"
-      }
-    },
     "schemas": {
       "ProductVariantOption1": {
         "type": "object",
@@ -2083,11 +2168,11 @@
         "type": "object",
         "properties": {
           "availableNumber": {
-            "description": "Quantity that is available and display on the storefront  (Exclude \u2018Reserved\u2019 and \u2018Ready to ship\u2019 status)",
+            "description": "Quantity that is available and display on the storefront  (Exclude ‘Reserved’ and ‘Ready to ship’ status)",
             "type": "integer"
           },
           "onHandAmount": {
-            "description": "Quantity in stock (Include \u2018Reserved\u2019 and \u2018Ready to ship\u2019 status)",
+            "description": "Quantity in stock (Include ‘Reserved’ and ‘Ready to ship’ status)",
             "type": "integer"
           },
           "readyToShipAmount": {
@@ -2110,6 +2195,45 @@
             "type": "string",
             "maxLength": 560,
             "example": "remark cancel"
+          }
+        }
+      },
+      "order.ConfirmDeliveryRequest": {
+        "type": "object",
+        "required": [
+          "completedAt",
+          "finalStatus",
+          "logisticCouirerCode",
+          "orderId",
+          "weight"
+        ],
+        "properties": {
+          "completedAt": {
+            "type": "string"
+          },
+          "finalStatus": {
+            "type": "string"
+          },
+          "logisticCouirerCode": {
+            "type": "string"
+          },
+          "orderId": {
+            "type": "string"
+          },
+          "trackingNumber": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "weight": {
+            "type": "number"
+          }
+        }
+      },
+      "order.ConfirmDeliveryResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
           }
         }
       },
@@ -2542,7 +2666,6 @@
             "description": "Shipment type",
             "type": "string",
             "enum": [
-              "",
               "STANDARD",
               "COD",
               "MESSENGER"
@@ -2859,7 +2982,7 @@
           "fdaAds": {
             "description": "The registration number for the advertising license of the FDA license/permit",
             "type": "string",
-            "example": "\u0e06\u0e2d. 1/2563"
+            "example": "ฆอ. 1/2563"
           },
           "tisi": {
             "description": "The industrial product standard number of the industrial standard",
@@ -2974,7 +3097,7 @@
             "example": "https://line.me/image_1.jpg"
           },
           "onHandNumber": {
-            "description": "Quantity in stock (Include \u2018Reserved\u2019 and \u2018Ready to ship\u2019 status).",
+            "description": "Quantity in stock (Include ‘Reserved’ and ‘Ready to ship’ status).",
             "type": "integer",
             "example": 10
           },
@@ -3333,7 +3456,7 @@
         "type": "object",
         "properties": {
           "availableNumber": {
-            "description": "Quantity that is available and display on the storefront  (Exclude \u2018Reserved\u2019 and \u2018Ready to ship\u2019 status)",
+            "description": "Quantity that is available and display on the storefront  (Exclude ‘Reserved’ and ‘Ready to ship’ status)",
             "type": "integer"
           },
           "barcode": {
@@ -3342,21 +3465,11 @@
           },
           "discountedPrice": {
             "description": "Product price after applying instant discount",
-            "anyOf": [
-              {
-                "type": "number"
-              },
-              {}
-            ]
+            "type": "number"
           },
           "id": {
             "description": "Product variant id",
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {}
-            ]
+            "type": "integer"
           },
           "imageUrl": {
             "description": "Product variant's image url",
@@ -3367,7 +3480,7 @@
             "type": "integer"
           },
           "onHandNumber": {
-            "description": "Quantity in stock (Include \u2018Reserved\u2019 and \u2018Ready to ship\u2019 status)",
+            "description": "Quantity in stock (Include ‘Reserved’ and ‘Ready to ship’ status)",
             "type": "integer"
           },
           "options": {
@@ -3523,6 +3636,14 @@
             "$ref": "#/components/schemas/settlement.SettlementDetail"
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "X-API-KEY": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Seller BP JWT token"
       }
     }
   }
